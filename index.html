@@ -1,39 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfólio e currículo online de Jacó Daybson, Analista de Suporte TI em Joinville-SC, especializado em infraestrutura, redes, virtualização e segurança da informação.">
-  <meta name="theme-color" content="#0f0f0e">
+  <meta name="description" content="Portfólio de Jacó Daybson — Analista de Suporte TI em Joinville-SC. Infraestrutura, redes, virtualização e segurança.">
+  <meta name="theme-color" content="#2300bd">
   <title>Jacó Daybson — Analista de Suporte TI</title>
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Pular para conteúdo</a>
-  <div class="progress-bar" id="progress" role="progressbar" aria-label="Progresso da leitura"></div>
+  <a class="skip-link" href="#main" data-i18n="skip">Pular para conteúdo</a>
+  <div class="progress-bar" id="progress" role="progressbar" aria-label="Progresso"></div>
 
-  <!-- NAVIGATION -->
+  <!-- NAV -->
   <header class="nav-shell" id="nav">
-    <div class="nav-inner">
+    <div class="nav-inner wrap">
       <a class="logo" href="#hero" aria-label="Início">
         <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
-          <circle cx="22" cy="22" r="21" stroke="currentColor" stroke-width="1.5"/>
-          <text x="22" y="27" font-size="13" font-weight="700" fill="currentColor" text-anchor="middle" font-family="serif">JD</text>
+          <rect width="44" height="44" rx="12" fill="var(--accent)"/>
+          <text x="22" y="29" font-size="15" font-weight="700" fill="white" text-anchor="middle" font-family="serif" font-style="italic">JD</text>
         </svg>
         <span>Jacó Daybson</span>
       </a>
-      <nav aria-label="Navegação principal">
-        <a href="#sobre">Sobre</a>
-        <a href="#habilidades">Habilidades</a>
-        <a href="#experiencia">Experiência</a>
-        <a href="#contato">Contato</a>
+
+      <nav aria-label="Principal">
+        <a href="#sobre" data-i18n="nav_sobre">Sobre</a>
+        <a href="#habilidades" data-i18n="nav_skills">Habilidades</a>
+        <a href="#experiencia" data-i18n="nav_exp">Experiência</a>
+        <a href="#contato" data-i18n="nav_contact">Contato</a>
       </nav>
-      <button class="theme-btn" data-theme-toggle aria-label="Alternar tema">
-        <svg class="icon-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="4"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2M3.22 3.22l1.42 1.42M15.36 15.36l1.42 1.42M3.22 16.78l1.42-1.42M15.36 4.64l1.42-1.42"/></svg>
-        <svg class="icon-moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17.39 13.61A7.5 7.5 0 0 1 6.39 2.61a7.5 7.5 0 1 0 11 11z"/></svg>
-      </button>
+
+      <div class="nav-actions">
+        <!-- Language toggle (preview) -->
+        <div class="lang-pill" role="group" aria-label="Idioma">
+          <span class="preview-badge" data-i18n="preview_label">Preview</span>
+          <button class="lang-btn active" data-lang-btn="pt" aria-pressed="true">PT</button>
+          <button class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-btn" data-theme-toggle aria-label="Alternar tema">
+          <svg class="icon-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="4"/><path d="M10 1v2M10 17v2M1 10h2M17 10h2M3.22 3.22l1.42 1.42M15.36 15.36l1.42 1.42M3.22 16.78l1.42-1.42M15.36 4.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17.39 13.61A7.5 7.5 0 0 1 6.39 2.61a7.5 7.5 0 1 0 11 11z"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -41,155 +51,180 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="grid-overlay"></div>
-      </div>
-      <div class="wrap hero-wrap">
-        <div class="hero-label fade-up" style="--d:0ms">
-          <span class="dot-live"></span> Aberto a novas oportunidades
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero-noise" aria-hidden="true"></div>
+      <div class="wrap hero-content">
+        <div class="hero-eyebrow fade-up" style="--d:0ms">
+          <span class="live-dot"></span>
+          <span data-i18n="hero_open">Aberto a novas oportunidades</span>
         </div>
-        <h1 class="hero-heading fade-up" style="--d:80ms">
-          Infraestrutura<br>
-          <em>que não para.</em>
+        <h1 class="hero-name fade-up" style="--d:80ms">
+          Jacó<br><em>Daybson</em>
         </h1>
-        <p class="hero-sub fade-up" style="--d:160ms">
-          Analista de Suporte TI com mais de 4 anos de experiência em servidores, redes, virtualização, monitoramento e ERPs corporativos.<br>Joinville&nbsp;– SC, Brasil.
+        <p class="hero-role fade-up" style="--d:150ms" data-i18n="hero_role">Analista de Suporte TI</p>
+        <p class="hero-desc fade-up" style="--d:220ms" data-i18n="hero_desc">
+          Mais de 4 anos de experiência em infraestrutura, redes, virtualização, segurança da informação e ERPs corporativos. Joinville&nbsp;–&nbsp;SC.
         </p>
-        <div class="hero-ctas fade-up" style="--d:240ms">
-          <a class="cta-primary" href="#contato">Falar comigo</a>
-          <a class="cta-ghost" href="#experiencia">Ver experiência ↓</a>
+        <div class="hero-ctas fade-up" style="--d:290ms">
+          <a class="btn-primary" href="#contato" data-i18n="hero_cta1">Falar comigo</a>
+          <a class="btn-outline" href="#experiencia" data-i18n="hero_cta2">Ver experiência ↓</a>
         </div>
-        <ul class="hero-tags fade-up" aria-label="Tecnologias" style="--d:320ms">
-          <li>VMware</li><li>Fortinet</li><li>PRTG</li><li>TOTVS</li><li>Grafana</li><li>Veeam</li>
-        </ul>
+        <div class="hero-pills fade-up" style="--d:360ms" aria-hidden="true">
+          <span>VMware</span><span>Fortinet</span><span>PRTG</span><span>TOTVS</span><span>Grafana</span><span>Veeam</span>
+        </div>
       </div>
-      <div class="hero-stat-strip fade-up" style="--d:400ms" aria-hidden="true">
-        <div class="stat"><b>+4 anos</b><span>Experiência em TI</span></div>
-        <div class="stat-div"></div>
-        <div class="stat"><b>5+</b><span>Plataformas ERP</span></div>
-        <div class="stat-div"></div>
-        <div class="stat"><b>5</b><span>Bancos de dados</span></div>
-        <div class="stat-div"></div>
-        <div class="stat"><b>Inglês B1</b><span>Intermediário</span></div>
+      <div class="hero-scroll-hint fade-up" style="--d:440ms" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span data-i18n="scroll_hint">role para baixo</span>
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- SOBRE -->
     <section class="section" id="sobre">
-      <div class="wrap about-grid">
-        <div class="about-aside reveal">
-          <div class="avatar-box">
-            <div class="avatar-inner" aria-label="Avatar Jacó Daybson">
-              <svg viewBox="0 0 120 120" fill="none" aria-hidden="true">
-                <circle cx="60" cy="60" r="59" stroke="var(--accent)" stroke-width="1"/>
-                <circle cx="60" cy="44" r="18" fill="var(--accent-dim)"/>
-                <path d="M14 105 Q60 72 106 105" fill="var(--accent-dim)"/>
-              </svg>
+      <div class="wrap">
+        <div class="section-kicker reveal" data-i18n="about_kicker">Sobre mim</div>
+        <h2 class="section-title reveal" data-i18n="about_title">Profissional de TI com foco em resultados</h2>
+        <div class="about-grid">
+          <!-- Foto revelada com efeito, não na hero -->
+          <div class="about-photo reveal">
+            <div class="photo-frame">
+              <img
+                src="./img/jaco-daybson.jpg"
+                alt="Foto de Jacó Daybson, Analista de Suporte TI"
+                width="400" height="500"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="photo-badge">
+                <span>+4</span>
+                <span data-i18n="photo_badge">anos em TI</span>
+              </div>
+            </div>
+            <dl class="info-cards">
+              <div class="info-card">
+                <dt>📍</dt><dd data-i18n="info_city">Joinville, SC</dd>
+              </div>
+              <div class="info-card">
+                <dt>✉️</dt><dd><a href="mailto:jaco@daybson.dev">jaco@daybson.dev</a></dd>
+              </div>
+              <div class="info-card">
+                <dt>🎓</dt><dd data-i18n="info_edu">ADS – Unifatecie <small>(cursando)</small></dd>
+              </div>
+              <div class="info-card">
+                <dt>🌐</dt><dd data-i18n="info_lang">Inglês B1 Intermediário</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="about-text">
+            <p class="about-lead reveal" data-i18n="about_p1">
+              Sou Jacó Daybson, analista com experiência em ambientes corporativos de médio e grande porte, atuando na gestão de infraestrutura, suporte a usuários, sustentação de ERPs e segurança da informação.
+            </p>
+            <p class="reveal" data-i18n="about_p2">
+              Ao longo da carreira trabalhei em indústrias de grande escala e redes de franquias, onde desenvolvi sólida capacidade de resolução de problemas sob pressão, comunicação clara com usuários não técnicos e visão integrada de TI com os processos de negócio.
+            </p>
+            <p class="reveal" data-i18n="about_p3">
+              Minha meta atual é aprofundar conhecimentos em segurança e nuvem, com foco nas certificações Cisco CCNA e Microsoft Azure.
+            </p>
+            <div class="cert-goals reveal">
+              <div class="cert-chip">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg>
+                Cisco CCNA
+              </div>
+              <div class="cert-chip">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg>
+                Microsoft Azure AZ-900
+              </div>
             </div>
           </div>
-          <dl class="info-list">
-            <div><dt>Cidade</dt><dd>Joinville, SC</dd></div>
-            <div><dt>E-mail</dt><dd><a href="mailto:jaco@daybson.dev">jaco@daybson.dev</a></dd></div>
-            <div><dt>CNH</dt><dd>Categoria AB</dd></div>
-            <div><dt>Formação</dt><dd>ADS — Unifatecie<br><small>cursando</small></dd></div>
-          </dl>
-        </div>
-        <div class="about-body">
-          <div class="section-label reveal">Sobre mim</div>
-          <h2 class="section-title reveal">Profissional de TI focado em estabilidade e resultados</h2>
-          <p class="reveal">Sou Jacó Daybson, analista com experiência em ambientes corporativos de médio e grande porte, atuando na gestão de infraestrutura, suporte a usuários, sustentação de ERPs e segurança da informação.</p>
-          <p class="reveal muted">Ao longo da carreira trabalhei em indústrias de grande escala e redes de franquias, onde desenvolvi sólida capacidade de resolução de problemas sob pressão, comunicação clara com usuários não técnicos e visão integrada de TI com os processos de negócio.</p>
-          <p class="reveal muted">Minha meta atual é aprofundar conhecimentos em segurança e nuvem, com foco nas certificações Cisco CCNA e Microsoft Azure.</p>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="section section-alt" id="habilidades">
+    <!-- HABILIDADES -->
+    <section class="section section-dim" id="habilidades">
       <div class="wrap">
-        <div class="section-label reveal">Habilidades</div>
-        <h2 class="section-title reveal">Tecnologias &amp; competências</h2>
-        <div class="skill-groups">
+        <div class="section-kicker reveal" data-i18n="skills_kicker">Habilidades</div>
+        <h2 class="section-title reveal" data-i18n="skills_title">Tecnologias &amp; competências</h2>
+        <div class="skills-grid">
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="3" width="16" height="12" rx="2"/><path d="M7 18h6M10 15v3"/></svg>
-              Infraestrutura
-            </h3>
-            <div class="tag-row">
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h3 data-i18n="sk_infra">Infraestrutura</h3>
+            <div class="tag-cloud">
               <span>Windows Server</span><span>Active Directory</span><span>DHCP</span><span>DNS</span><span>File Server</span><span>Terminal Services</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M2 10h16M10 2a13 13 0 0 1 0 16M10 2a13 13 0 0 0 0 16"/></svg>
-              Redes
-            </h3>
-            <div class="tag-row">
-              <span>Cisco Switches</span><span>MikroTik</span><span>Ubiquiti UniFi</span><span>Cabeamento estruturado</span><span>Wi-Fi corporativo</span><span>VLANs</span>
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a16 16 0 0 1 0 20M12 2a16 16 0 0 0 0 20"/></svg>
+            </div>
+            <h3 data-i18n="sk_net">Redes</h3>
+            <div class="tag-cloud">
+              <span>Cisco Switches</span><span>MikroTik</span><span>Ubiquiti UniFi</span><span>Cabeamento</span><span>VLANs</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 2L2 6v8l8 4 8-4V6l-8-4z"/><path d="M10 10L2 6M10 10l8-4M10 10v10"/></svg>
-              Virtualização &amp; Backup
-            </h3>
-            <div class="tag-row">
-              <span>VMware vSphere</span><span>Veeam Backup &amp; Replication</span>
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 data-i18n="sk_virt">Virtualização &amp; Backup</h3>
+            <div class="tag-cloud">
+              <span>VMware vSphere</span><span>Veeam Backup</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="11" width="14" height="6" rx="1"/><path d="M10 2v9M7 5l3-3 3 3"/><path d="M6 14h.01M9 14h.01"/></svg>
-              Segurança
-            </h3>
-            <div class="tag-row">
-              <span>Fortinet Firewall</span><span>Kaspersky</span><span>Bitdefender</span><span>Gestão de acessos</span><span>Segurança de endpoints</span>
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 data-i18n="sk_sec">Segurança</h3>
+            <div class="tag-cloud">
+              <span>Fortinet Firewall</span><span>Kaspersky</span><span>Bitdefender</span><span>Gestão de acessos</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><polyline points="2 12 6 6 10 10 13 7 18 13"/><rect x="2" y="2" width="16" height="16" rx="2"/></svg>
-              Monitoramento
-            </h3>
-            <div class="tag-row">
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 data-i18n="sk_mon">Monitoramento</h3>
+            <div class="tag-cloud">
               <span>PRTG</span><span>TSysmon / Centreon</span><span>Grafana</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><ellipse cx="10" cy="6" rx="8" ry="3"/><path d="M2 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M2 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4"/></svg>
-              Bancos de dados
-            </h3>
-            <div class="tag-row">
-              <span>PostgreSQL</span><span>Oracle</span><span>MySQL</span><span>MSSQL</span><span>Progress (TOTVS)</span>
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/></svg>
+            </div>
+            <h3 data-i18n="sk_db">Bancos de dados</h3>
+            <div class="tag-cloud">
+              <span>PostgreSQL</span><span>Oracle</span><span>MySQL</span><span>MSSQL</span><span>Progress</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="4" width="16" height="13" rx="2"/><path d="M2 8h16"/><path d="M6 4V2M14 4V2"/></svg>
-              ERP / MRP
-            </h3>
-            <div class="tag-row">
-              <span>TOTVS Datasul</span><span>TOTVS Agro Bioenergia (PIMSCS)</span><span>Alterdata</span><span>SISMA</span>
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M7 4V2M17 4V2"/></svg>
+            </div>
+            <h3 data-i18n="sk_erp">ERP / MRP</h3>
+            <div class="tag-cloud">
+              <span>TOTVS Datasul</span><span>TOTVS Agro (PIMSCS)</span><span>Alterdata</span><span>SISMA</span>
             </div>
           </div>
 
-          <div class="skill-group reveal">
-            <h3>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M17 8h-1V5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v3H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z"/></svg>
-              Gestão de chamados
-            </h3>
-            <div class="tag-row">
-              <span>SULTS</span><span>SLA</span><span>Resolução de incidentes</span><span>Atendimento ao usuário</span>
+          <div class="skill-card reveal">
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M22 16.92V19a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 4.18 2 2 0 0 1 5 2h2.09a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3 data-i18n="sk_itsm">Suporte &amp; ITSM</h3>
+            <div class="tag-cloud">
+              <span>SULTS</span><span>SLA</span><span>Help Desk</span><span>Atendimento</span>
             </div>
           </div>
 
@@ -197,77 +232,98 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
+    <!-- EXPERIÊNCIA -->
     <section class="section" id="experiencia">
       <div class="wrap">
-        <div class="section-label reveal">Histórico</div>
-        <h2 class="section-title reveal">Experiência profissional</h2>
-
+        <div class="section-kicker reveal" data-i18n="exp_kicker">Histórico profissional</div>
+        <h2 class="section-title reveal" data-i18n="exp_title">Experiência</h2>
         <div class="timeline">
 
           <article class="tl-item reveal">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Fev/2026 — Atual</div>
-            <div class="tl-card">
-              <div class="tl-company">300 Franchising · Joinville, SC</div>
-              <h3>Analista de Suporte TI</h3>
-              <ul>
-                <li>Monitoramento proativo da infraestrutura com <strong>PRTG</strong>, garantindo visibilidade e disponibilidade contínua dos sistemas.</li>
-                <li>Gestão centralizada de chamados via <strong>SULTS</strong> com controle rigoroso de SLA e resolução de incidentes.</li>
-                <li>Proteção de endpoints com <strong>Bitdefender</strong> em ambiente distribuído de rede de franquias.</li>
-                <li>Implantação e manutenção de redes com <strong>MikroTik</strong>, cabeamento estruturado e <strong>Firewall Fortinet</strong>.</li>
-                <li>Sustentação e disponibilidade do <strong>ERP Alterdata</strong> nas unidades franqueadas.</li>
-              </ul>
-              <div class="tl-tags">
-                <span>PRTG</span><span>SULTS</span><span>Bitdefender</span><span>MikroTik</span><span>Fortinet</span><span>Alterdata</span>
+            <div class="tl-left">
+              <div class="tl-dot current"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-right">
+              <div class="tl-meta">
+                <span class="tl-date" data-i18n="exp1_date">Fev/2026 — Atual</span>
+                <span class="tl-badge current-badge" data-i18n="current_badge">Atual</span>
+              </div>
+              <div class="tl-card">
+                <p class="tl-company">300 Franchising · Joinville, SC</p>
+                <h3 data-i18n="exp1_role">Analista de Suporte TI</h3>
+                <ul>
+                  <li data-i18n="exp1_li1">Monitoramento proativo com <strong>PRTG</strong>, garantindo disponibilidade e visibilidade contínua dos sistemas.</li>
+                  <li data-i18n="exp1_li2">Gestão de chamados via <strong>SULTS</strong> com controle rigoroso de SLA e resolução de incidentes.</li>
+                  <li data-i18n="exp1_li3">Proteção de endpoints com <strong>Bitdefender</strong> em rede distribuída de franquias.</li>
+                  <li data-i18n="exp1_li4">Infraestrutura física com <strong>MikroTik</strong>, cabeamento estruturado e <strong>Firewall Fortinet</strong>.</li>
+                  <li data-i18n="exp1_li5">Sustentação do <strong>ERP Alterdata</strong> assegurando continuidade operacional das unidades.</li>
+                </ul>
+                <div class="tl-tags"><span>PRTG</span><span>Bitdefender</span><span>Fortinet</span><span>Alterdata</span><span>SULTS</span></div>
               </div>
             </div>
           </article>
 
           <article class="tl-item reveal">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Jun/2022 — Jan/2026</div>
-            <div class="tl-card">
-              <div class="tl-company">Usina União e Indústria S/A · Primavera, PE</div>
-              <h3>Analista de Suporte TI</h3>
-              <ul>
-                <li>Gestão de servidores virtualizados com <strong>VMware</strong> e automação de backups com <strong>Veeam</strong>.</li>
-                <li>Monitoramento com <strong>TSysmon (Centreon)</strong> e <strong>Grafana</strong>, antecipando falhas e reduzindo indisponibilidades.</li>
-                <li>Administração de bancos de dados <strong>Postgres, Oracle, MySQL, MSSQL</strong> e <strong>Progress</strong>, criando dashboards e relatórios analíticos.</li>
-                <li>Estabilização da rede corporativa com <strong>Switches CISCO</strong> e <strong>Firewalls Fortinet</strong>.</li>
-                <li>Suporte e sustentação dos ERPs <strong>TOTVS Datasul</strong> e <strong>TOTVS Agro (PIMSCS)</strong>.</li>
-              </ul>
-              <div class="tl-tags">
-                <span>VMware</span><span>Veeam</span><span>Grafana</span><span>Cisco</span><span>Fortinet</span><span>TOTVS</span>
+            <div class="tl-left">
+              <div class="tl-dot"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-right">
+              <div class="tl-meta">
+                <span class="tl-date" data-i18n="exp2_date">Jun/2022 — Jan/2026</span>
+              </div>
+              <div class="tl-card">
+                <p class="tl-company">Usina União e Indústria S/A · Primavera, PE</p>
+                <h3 data-i18n="exp2_role">Analista de Suporte TI</h3>
+                <ul>
+                  <li data-i18n="exp2_li1">Gestão de servidores virtualizados com <strong>VMware</strong> e automação de backups com <strong>Veeam</strong>.</li>
+                  <li data-i18n="exp2_li2">Monitoramento com <strong>TSysmon/Centreon</strong> e <strong>Grafana</strong>, antecipando falhas e reduzindo indisponibilidades.</li>
+                  <li data-i18n="exp2_li3">Administração de <strong>PostgreSQL, Oracle, MySQL, MSSQL</strong> e <strong>Progress</strong> com dashboards analíticos.</li>
+                  <li data-i18n="exp2_li4">Estabilização de rede corporativa com <strong>Switches CISCO</strong> e <strong>Firewalls Fortinet</strong>.</li>
+                  <li data-i18n="exp2_li5">Suporte aos ERPs <strong>TOTVS Datasul</strong> e <strong>TOTVS Agro (PIMSCS)</strong>.</li>
+                </ul>
+                <div class="tl-tags"><span>VMware</span><span>Veeam</span><span>Grafana</span><span>Cisco</span><span>TOTVS</span><span>Oracle</span></div>
               </div>
             </div>
           </article>
 
           <article class="tl-item reveal">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Mai/2021 — Mai/2022</div>
-            <div class="tl-card">
-              <div class="tl-company">Noral Nordeste Alumínio LTDA · Jaboatão dos Guararapes, PE</div>
-              <h3>Assistente Administrativo</h3>
-              <ul>
-                <li>Otimização de processos internos administrativos, gerenciamento de ponto eletrônico e apoio ao recrutamento de pessoal.</li>
-              </ul>
+            <div class="tl-left">
+              <div class="tl-dot"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-right">
+              <div class="tl-meta">
+                <span class="tl-date" data-i18n="exp3_date">Mai/2021 — Mai/2022</span>
+              </div>
+              <div class="tl-card">
+                <p class="tl-company">Noral Nordeste Alumínio LTDA · Jaboatão dos Guararapes, PE</p>
+                <h3 data-i18n="exp3_role">Assistente Administrativo</h3>
+                <ul>
+                  <li data-i18n="exp3_li1">Otimização de processos internos, controle de ponto eletrônico e apoio ao recrutamento de pessoal.</li>
+                </ul>
+              </div>
             </div>
           </article>
 
           <article class="tl-item reveal">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Set/2018 — Mai/2021</div>
-            <div class="tl-card">
-              <div class="tl-company">Usina União e Indústria S/A · Primavera, PE</div>
-              <h3>Auxiliar Administrativo / Suporte TI</h3>
-              <ul>
-                <li>Suporte técnico, gestão de hardware e controle de acessos para garantir estabilidade operacional.</li>
-                <li>Manutenção do <strong>ERP TOTVS Datasul</strong>, administração de banco de dados e implementação de rotinas de backup.</li>
-                <li>Implementação de políticas de segurança e controle de acesso, reduzindo vulnerabilidades internas.</li>
-              </ul>
-              <div class="tl-tags">
-                <span>TOTVS Datasul</span><span>Backup</span><span>Segurança</span>
+            <div class="tl-left">
+              <div class="tl-dot"></div>
+            </div>
+            <div class="tl-right">
+              <div class="tl-meta">
+                <span class="tl-date" data-i18n="exp4_date">Set/2018 — Mai/2021</span>
+              </div>
+              <div class="tl-card">
+                <p class="tl-company">Usina União e Indústria S/A · Primavera, PE</p>
+                <h3 data-i18n="exp4_role">Auxiliar Administrativo / Suporte TI</h3>
+                <ul>
+                  <li data-i18n="exp4_li1">Suporte técnico, gestão de hardware e controle de acessos.</li>
+                  <li data-i18n="exp4_li2">Manutenção do <strong>ERP TOTVS Datasul</strong> e administração de banco de dados.</li>
+                  <li data-i18n="exp4_li3">Implementação de políticas de segurança e rotinas de backup eficientes.</li>
+                </ul>
+                <div class="tl-tags"><span>TOTVS Datasul</span><span>Backup</span><span>Segurança</span></div>
               </div>
             </div>
           </article>
@@ -276,19 +332,41 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section contact-section" id="contato">
+    <!-- DOWNLOAD CV -->
+    <section class="cv-section" id="curriculo">
+      <div class="wrap cv-inner reveal">
+        <div class="cv-glow" aria-hidden="true"></div>
+        <div class="cv-text">
+          <p class="section-kicker" data-i18n="cv_kicker">Currículo</p>
+          <h2 data-i18n="cv_title">Baixar meu currículo</h2>
+          <p data-i18n="cv_desc">Versão completa em PDF com todo o histórico profissional, habilidades e competências.</p>
+        </div>
+        <div class="cv-actions">
+          <a class="btn-primary btn-large" href="./assets/curriculo-jaco-daybson.pdf" download="Curriculo-Jaco-Daybson.pdf">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3v10M5 9l5 5 5-5M3 17h14"/></svg>
+            <span data-i18n="cv_btn">Baixar PDF</span>
+          </a>
+          <a class="btn-outline" href="./assets/curriculo-jaco-daybson.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 3h6v6M17 3l-8 8M8 5H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4"/></svg>
+            <span data-i18n="cv_open">Abrir no navegador</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section section-dim" id="contato">
       <div class="wrap">
         <div class="contact-card reveal">
-          <div class="contact-glow" aria-hidden="true"></div>
-          <p class="section-label">Contato</p>
-          <h2 class="contact-heading">Vamos conversar.</h2>
-          <p class="contact-sub">Aberto a oportunidades em suporte TI, infraestrutura, redes e sustentação de ambientes corporativos.</p>
-          <a class="cta-primary" href="mailto:jaco@daybson.dev?subject=Contato%20via%20daybson.dev">jaco@daybson.dev</a>
-          <div class="contact-extra">
-            <span>(81) 99882-9467</span>
-            <span>·</span>
-            <span>Joinville, Santa Catarina</span>
+          <div class="contact-rays" aria-hidden="true"></div>
+          <p class="section-kicker" data-i18n="contact_kicker">Contato</p>
+          <h2 class="contact-heading" data-i18n="contact_title">Vamos conversar.</h2>
+          <p class="contact-sub" data-i18n="contact_sub">Aberto a oportunidades em suporte TI, infraestrutura, redes e sustentação de ambientes corporativos.</p>
+          <a class="btn-primary btn-large" href="mailto:jaco@daybson.dev?subject=Contato%20via%20daybson.dev">
+            jaco@daybson.dev
+          </a>
+          <div class="contact-meta">
+            <span>(81) 99882-9467</span><span class="sep">·</span><span data-i18n="contact_city">Joinville, Santa Catarina</span>
           </div>
         </div>
       </div>
@@ -299,46 +377,209 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>© <span id="yr"></span> Jacó Daybson Oliveira da Silva</span>
-      <span class="footer-tech">HTML &amp; CSS · Cloudflare Pages</span>
+      <span class="footer-right">
+        <span data-i18n="footer_built">Feito com HTML &amp; CSS</span>
+        &nbsp;·&nbsp;Cloudflare Pages
+      </span>
     </div>
   </footer>
 
-  <script>
-  (() => {
-    // Theme
-    const root = document.documentElement;
-    const btn  = document.querySelector('[data-theme-toggle]');
-    let dark = matchMedia('(prefers-color-scheme:dark)').matches;
-    const apply = () => {
-      root.setAttribute('data-theme', dark ? 'dark' : 'light');
-      btn.setAttribute('aria-label', dark ? 'Ativar tema claro' : 'Ativar tema escuro');
-    };
-    apply();
-    btn.addEventListener('click', () => { dark = !dark; apply(); });
+<script>
+/* ──────────────────────────────────────────
+   i18n translations
+──────────────────────────────────────────── */
+const T = {
+  pt: {
+    skip:"Pular para conteúdo", nav_sobre:"Sobre", nav_skills:"Habilidades",
+    nav_exp:"Experiência", nav_contact:"Contato", preview_label:"Preview",
+    hero_open:"Aberto a novas oportunidades",
+    hero_role:"Analista de Suporte TI",
+    hero_desc:"Mais de 4 anos de experiência em infraestrutura, redes, virtualização, segurança da informação e ERPs corporativos. Joinville\u00a0–\u00a0SC.",
+    hero_cta1:"Falar comigo", hero_cta2:"Ver experiência ↓",
+    scroll_hint:"role para baixo",
+    about_kicker:"Sobre mim",
+    about_title:"Profissional de TI com foco em resultados",
+    photo_badge:"anos em TI",
+    info_city:"Joinville, SC",
+    info_edu:"ADS – Unifatecie <small>(cursando)</small>",
+    info_lang:"Inglês B1 Intermediário",
+    about_p1:"Sou Jacó Daybson, analista com experiência em ambientes corporativos de médio e grande porte, atuando na gestão de infraestrutura, suporte a usuários, sustentação de ERPs e segurança da informação.",
+    about_p2:"Ao longo da carreira trabalhei em indústrias de grande escala e redes de franquias, onde desenvolvi sólida capacidade de resolução de problemas sob pressão, comunicação clara com usuários não técnicos e visão integrada de TI com os processos de negócio.",
+    about_p3:"Minha meta atual é aprofundar conhecimentos em segurança e nuvem, com foco nas certificações Cisco CCNA e Microsoft Azure.",
+    skills_kicker:"Habilidades", skills_title:"Tecnologias &amp; competências",
+    sk_infra:"Infraestrutura", sk_net:"Redes", sk_virt:"Virtualização &amp; Backup",
+    sk_sec:"Segurança", sk_mon:"Monitoramento", sk_db:"Bancos de dados",
+    sk_erp:"ERP / MRP", sk_itsm:"Suporte &amp; ITSM",
+    exp_kicker:"Histórico profissional", exp_title:"Experiência",
+    exp1_date:"Fev/2026 — Atual", current_badge:"Atual",
+    exp1_role:"Analista de Suporte TI",
+    exp1_li1:"Monitoramento proativo com <strong>PRTG</strong>, garantindo disponibilidade e visibilidade contínua dos sistemas.",
+    exp1_li2:"Gestão de chamados via <strong>SULTS</strong> com controle rigoroso de SLA e resolução de incidentes.",
+    exp1_li3:"Proteção de endpoints com <strong>Bitdefender</strong> em rede distribuída de franquias.",
+    exp1_li4:"Infraestrutura física com <strong>MikroTik</strong>, cabeamento estruturado e <strong>Firewall Fortinet</strong>.",
+    exp1_li5:"Sustentação do <strong>ERP Alterdata</strong> assegurando continuidade operacional das unidades.",
+    exp2_date:"Jun/2022 — Jan/2026", exp2_role:"Analista de Suporte TI",
+    exp2_li1:"Gestão de servidores virtualizados com <strong>VMware</strong> e automação de backups com <strong>Veeam</strong>.",
+    exp2_li2:"Monitoramento com <strong>TSysmon/Centreon</strong> e <strong>Grafana</strong>, antecipando falhas e reduzindo indisponibilidades.",
+    exp2_li3:"Administração de <strong>PostgreSQL, Oracle, MySQL, MSSQL</strong> e <strong>Progress</strong> com dashboards analíticos.",
+    exp2_li4:"Estabilização de rede corporativa com <strong>Switches CISCO</strong> e <strong>Firewalls Fortinet</strong>.",
+    exp2_li5:"Suporte aos ERPs <strong>TOTVS Datasul</strong> e <strong>TOTVS Agro (PIMSCS)</strong>.",
+    exp3_date:"Mai/2021 — Mai/2022", exp3_role:"Assistente Administrativo",
+    exp3_li1:"Otimização de processos internos, controle de ponto eletrônico e apoio ao recrutamento de pessoal.",
+    exp4_date:"Set/2018 — Mai/2021", exp4_role:"Auxiliar Administrativo / Suporte TI",
+    exp4_li1:"Suporte técnico, gestão de hardware e controle de acessos.",
+    exp4_li2:"Manutenção do <strong>ERP TOTVS Datasul</strong> e administração de banco de dados.",
+    exp4_li3:"Implementação de políticas de segurança e rotinas de backup eficientes.",
+    cv_kicker:"Currículo", cv_title:"Baixar meu currículo",
+    cv_desc:"Versão completa em PDF com todo o histórico profissional, habilidades e competências.",
+    cv_btn:"Baixar PDF", cv_open:"Abrir no navegador",
+    contact_kicker:"Contato", contact_title:"Vamos conversar.",
+    contact_sub:"Aberto a oportunidades em suporte TI, infraestrutura, redes e sustentação de ambientes corporativos.",
+    contact_city:"Joinville, Santa Catarina",
+    footer_built:"Feito com HTML &amp; CSS"
+  },
+  en: {
+    skip:"Skip to content", nav_sobre:"About", nav_skills:"Skills",
+    nav_exp:"Experience", nav_contact:"Contact", preview_label:"Preview",
+    hero_open:"Open to new opportunities",
+    hero_role:"IT Support Analyst",
+    hero_desc:"Over 4 years of experience in infrastructure, networking, virtualization, information security and corporate ERPs. Joinville\u00a0–\u00a0SC, Brazil.",
+    hero_cta1:"Get in touch", hero_cta2:"See experience ↓",
+    scroll_hint:"scroll down",
+    about_kicker:"About",
+    about_title:"IT Professional focused on results",
+    photo_badge:"years in IT",
+    info_city:"Joinville, SC — Brazil",
+    info_edu:"ADS (Systems Development) – Unifatecie <small>(in progress)</small>",
+    info_lang:"English B1 Intermediate",
+    about_p1:"I am Jacó Daybson, an IT analyst with experience in medium and large corporate environments, working in infrastructure management, end-user support, ERP support and information security.",
+    about_p2:"Throughout my career I have worked in large-scale industries and franchise networks, developing strong problem-solving skills under pressure, clear communication with non-technical users, and an integrated view of IT and business processes.",
+    about_p3:"My current goal is to deepen my knowledge in security and cloud computing, focusing on the Cisco CCNA and Microsoft Azure certifications.",
+    skills_kicker:"Skills", skills_title:"Technologies &amp; Competencies",
+    sk_infra:"Infrastructure", sk_net:"Networking", sk_virt:"Virtualization &amp; Backup",
+    sk_sec:"Security", sk_mon:"Monitoring", sk_db:"Databases",
+    sk_erp:"ERP / MRP", sk_itsm:"Support &amp; ITSM",
+    exp_kicker:"Work history", exp_title:"Experience",
+    exp1_date:"Feb/2026 — Present", current_badge:"Current",
+    exp1_role:"IT Support Analyst",
+    exp1_li1:"Proactive infrastructure monitoring with <strong>PRTG</strong>, ensuring continuous system availability and visibility.",
+    exp1_li2:"Ticket management via <strong>SULTS</strong> with strict SLA control and incident resolution.",
+    exp1_li3:"Endpoint protection with <strong>Bitdefender</strong> across a distributed franchise network.",
+    exp1_li4:"Physical infrastructure with <strong>MikroTik</strong>, structured cabling and <strong>Fortinet Firewall</strong>.",
+    exp1_li5:"Sustaining <strong>Alterdata ERP</strong> availability across all franchise units.",
+    exp2_date:"Jun/2022 — Jan/2026", exp2_role:"IT Support Analyst",
+    exp2_li1:"Management of virtualized servers with <strong>VMware</strong> and backup automation with <strong>Veeam</strong>.",
+    exp2_li2:"Monitoring with <strong>TSysmon/Centreon</strong> and <strong>Grafana</strong>, anticipating failures and reducing downtime.",
+    exp2_li3:"Administration of <strong>PostgreSQL, Oracle, MySQL, MSSQL</strong> and <strong>Progress</strong> with analytical dashboards.",
+    exp2_li4:"Corporate network stabilization with <strong>CISCO Switches</strong> and <strong>Fortinet Firewalls</strong>.",
+    exp2_li5:"Support for <strong>TOTVS Datasul</strong> and <strong>TOTVS Agro (PIMSCS)</strong> ERPs.",
+    exp3_date:"May/2021 — May/2022", exp3_role:"Administrative Assistant",
+    exp3_li1:"Optimization of internal processes, time-clock management and support for personnel recruitment.",
+    exp4_date:"Sep/2018 — May/2021", exp4_role:"Administrative Assistant / IT Support",
+    exp4_li1:"Technical support, hardware management and access control.",
+    exp4_li2:"Maintenance of <strong>TOTVS Datasul ERP</strong> and database administration.",
+    exp4_li3:"Implementation of security policies and efficient backup routines.",
+    cv_kicker:"Resume", cv_title:"Download my resume",
+    cv_desc:"Full PDF version with complete work history, skills and competencies.",
+    cv_btn:"Download PDF", cv_open:"Open in browser",
+    contact_kicker:"Contact", contact_title:"Let's talk.",
+    contact_sub:"Open to opportunities in IT support, infrastructure, networking and corporate environment management.",
+    contact_city:"Joinville, Santa Catarina — Brazil",
+    footer_built:"Built with HTML &amp; CSS"
+  }
+};
 
-    // Year
-    document.getElementById('yr').textContent = new Date().getFullYear();
+(function () {
+  /* ── Theme ── */
+  const root = document.documentElement;
+  const themeBtn = document.querySelector('[data-theme-toggle]');
+  let dark = matchMedia('(prefers-color-scheme:dark)').matches;
+  const applyTheme = () => root.setAttribute('data-theme', dark ? 'dark' : 'light');
+  applyTheme();
+  themeBtn.addEventListener('click', () => { dark = !dark; applyTheme(); });
 
-    // Progress bar
-    const bar = document.getElementById('progress');
-    const onScroll = () => {
-      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-      bar.style.width = Math.min(pct, 100) + '%';
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
+  /* ── Language ── */
+  let lang = 'pt';
+  const applyLang = (l) => {
+    lang = l;
+    root.setAttribute('lang', l === 'pt' ? 'pt-BR' : 'en');
+    root.setAttribute('data-lang', l);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (T[l][key] !== undefined) el.innerHTML = T[l][key];
+    });
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+      const isActive = btn.dataset.langBtn === l;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+  document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.langBtn));
+  });
 
-    // Scroll reveal with IntersectionObserver
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal, .fade-up').forEach(el => obs.observe(el));
+  /* ── Year ── */
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Nav shrink
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('nav-scrolled', window.scrollY > 48);
-    }, { passive: true });
-  })();
-  </script>
+  /* ── Progress bar ── */
+  const bar = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    bar.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
+  }, { passive: true });
+
+  /* ── Nav scroll shrink ── */
+  const navEl = document.getElementById('nav');
+  addEventListener('scroll', () => navEl.classList.toggle('nav-scrolled', scrollY > 60), { passive: true });
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .fade-up').forEach(el => io.observe(el));
+
+  /* ── Hero canvas particles ── */
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, pts = [];
+  const resize = () => {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    pts = Array.from({ length: Math.floor(W * H / 14000) }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
+      r: Math.random() * 1.5 + .5
+    }));
+  };
+  resize();
+  addEventListener('resize', resize);
+  const getAccent = () => getComputedStyle(root).getPropertyValue('--accent-raw').trim() || '35,0,189';
+  let raf;
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    const accent = getAccent();
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${accent},.5)`;
+      ctx.fill();
+    });
+    pts.forEach((a, i) => pts.slice(i + 1).forEach(b => {
+      const dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+      if (d < 100) {
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(${accent},${.18 * (1 - d / 100)})`;
+        ctx.lineWidth = .5;
+        ctx.stroke();
+      }
+    }));
+    raf = requestAnimationFrame(draw);
+  };
+  draw();
+})();
+</script>
 </body>
 </html>
